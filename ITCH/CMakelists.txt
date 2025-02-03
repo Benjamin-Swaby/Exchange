@@ -8,6 +8,8 @@ enable_testing()
 # Specify the C++ standard
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
+# Set CXX flags
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O2")
 
 include(FetchContent)
 
@@ -22,7 +24,7 @@ add_library(ITCH STATIC
 
 # Include directories
 target_include_directories(ITCH PUBLIC include)
-target_link_libraries(ITCH Boost)
+target_link_libraries(ITCH)
 
 # Fetch Google Test
 
@@ -38,7 +40,15 @@ add_executable(ITCH_test
     test/test_handler.cpp
 )
 
+
 target_link_libraries(ITCH_test gtest gtest_main pthread ITCH)
 
 include(GoogleTest)
 gtest_discover_tests(ITCH_test)
+
+
+
+add_executable(ITCH_Example
+    main.cpp
+)
+target_link_libraries(ITCH_Example ITCH)

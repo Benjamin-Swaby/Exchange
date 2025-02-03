@@ -10,7 +10,7 @@ public:
     int flag = 0;
     int flags[10] = {0,0,0,0,0,0,0,0,0,0};
 
-    void handle(ITCH41::System_Event_Message* msg) override {
+    void handle(ITCH41::System_Event_Message* msg, int socket) override {
         flags[6] = 1;
         flags[0] = (msg->messageType == 'S');
         flags[1] = (msg->timestamp == 0);
@@ -18,10 +18,8 @@ public:
         flag = flags[0] && flags[1] && flags[2];
     }
 
-    void handle(Stock_Directory* m) {
-
+    void handle(Stock_Directory* m, int socket) {
         flags[6] = 1;
-
         flags[0] = (m->messageType == 'R');
         flags[1] = (m->timestamp == 67890);
         flags[2] = (m->marketCategory == 'Q');
@@ -29,66 +27,53 @@ public:
         flags[4] = (m->roundLotSize == 100);
         flags[5] = (m->roundLotsOnly == 'Y');
         flag = flags[0] && flags[1] && flags[2] && flags[3] && flags[4] && flags[5];
-
     }
-    void handle(Stock_Trading_Action* m) {
 
+    void handle(Stock_Trading_Action* m, int socket) {
         flags[6] = 1;
-
         flags[0] = (m->messageType == 'H');
         flags[1] = (m->timestamp == 67890);
         flags[2] = (m->reserved == 0);
         flags[3] = (m->tradingState == 'T');
-
     }
 
-    void handle(Reg_SHO_Restriction* m) {
-
+    void handle(Reg_SHO_Restriction* m, int socket) {
         flags[6] = 1;
-
         flags[0] = (m->messageType == 'Y');
         flags[1] = (m->timestamp == 67890);
         flags[2] = (m->regSHOAction == '1');
-
     }
 
-
-    void handle(Market_Participant_Position* m) {
-
+    void handle(Market_Participant_Position* m, int socket) {
         flags[6] = 1;
-
         flags[0] = (m->messageType == 'L');
         flags[1] = (m->timestamp == 67890);
         flags[2] = (m->MPID == 67890);
         flags[3] = (m->primaryMarketMaker == 'Y');
         flags[4] = (m->marketMakerMode == 'N');
         flags[5] = (m->marketParticipantState == 'A');
-
     }
 
-    void handle(Add_Order_Message* m) {
-
+    void handle(Add_Order_Message* m, int socket) {
         flags[6] = 1;
-
         flags[0] = (m->messageType == 'A');
         flags[1] = (m->timestamp == 67890);
         flags[2] = (m->buySellIndicator == 'B');
         flags[3] = (m->shares == 67890);
         flags[4] = (m->price == 67890);
-
     }
 
-    void handle(Add_Order_MPID_Attribution* m) {return;}
-    void handle(Order_Executed_Message* m) {return;}
-    void handle(Order_Executed_With_Price_Message* m) {return;}
-    void handle(Order_Cancel_Message* m) {return;}
-    void handle(Order_Delete_Message* m) {return;}
-    void handle(Order_Replace_Message* m) {return;}
-    void handle(Trade_Message* m) {return;}
-    void handle(Cross_Trade_Message* m) {return;}
-    void handle(Broken_Trade_Message* m) {return;}
-    void handle(NOII_Message* m) {return;}
-    void handle(RPII_Message* m) {return;}
+    void handle(Add_Order_MPID_Attribution* m, int socket) {return;}
+    void handle(Order_Executed_Message* m, int socket) {return;}
+    void handle(Order_Executed_With_Price_Message* m, int socket) {return;}
+    void handle(Order_Cancel_Message* m, int socket) {return;}
+    void handle(Order_Delete_Message* m, int socket) {return;}
+    void handle(Order_Replace_Message* m, int socket) {return;}
+    void handle(Trade_Message* m, int socket) {return;}
+    void handle(Cross_Trade_Message* m, int socket) {return;}
+    void handle(Broken_Trade_Message* m, int socket) {return;}
+    void handle(NOII_Message* m, int socket) {return;}
+    void handle(RPII_Message* m, int socket) {return;}
 };
 
 
@@ -99,7 +84,7 @@ TEST(handler, system_event_message) {
 
     // calling action on the buffer should handle this as a System_Event_Message
     // This if done correctly will set the flag attribute in th to 1
-    th->action(buffer, 6);
+    th->action(buffer, 6, 0);
 
     EXPECT_EQ(th->flag, 1);
 
@@ -130,7 +115,7 @@ TEST(handler, stock_directory) {
 
     // calling action on the buffer should handle this as a Stock_Directory_Message
     // This if done correctly will set the flag attribute in th to 1
-    th->action(buffer, 20);
+    th->action(buffer, 20, 0);
 
 
     EXPECT_EQ(th->flags[0], 1);
@@ -158,7 +143,7 @@ TEST(handler, stock_trading_action) {
 
 
     auto th = new test_handler;
-    th->action(buffer, 19);
+    th->action(buffer, 19, 0);
 
     EXPECT_EQ(th->flags[0], 1);
     EXPECT_EQ(th->flags[1], 1);
@@ -179,7 +164,7 @@ TEST(handler, reg_sho_restriction) {
     };
 
     auto th = new test_handler;
-    th->action(buffer, 14);
+    th->action(buffer, 14, 0);
 
 
     EXPECT_EQ(th->flags[0], 1);
@@ -203,7 +188,7 @@ TEST(handler, market_participant_position) {
     };
 
     auto th = new test_handler;
-    th->action(buffer, 20);
+    th->action(buffer, 20, 0);
 
     EXPECT_EQ(th->flags[0], 1);
     EXPECT_EQ(th->flags[1], 1);
@@ -231,7 +216,7 @@ TEST(handler, add_order_message) {
 
 
     auto th = new test_handler;
-    th->action(buffer, 30);
+    th->action(buffer, 30, 0);
 
 
     EXPECT_EQ(th->flags[0], 1);
@@ -253,7 +238,7 @@ TEST(handler, malformed) {
 
     auto th = new test_handler;
 
-    th->action(buffer, 5);
+    th->action(buffer, 5, 0);
 
     EXPECT_EQ(th->flags[0], 0);
     EXPECT_EQ(th->flags[1], 0);
