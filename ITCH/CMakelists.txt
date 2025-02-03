@@ -9,19 +9,23 @@ enable_testing()
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
+include(FetchContent)
+
+
 # Add the library
 add_library(ITCH STATIC 
     itch.cpp 
     system_event_message.cpp 
     time.cpp
+    handlerInterface.cpp
 )
 
 # Include directories
 target_include_directories(ITCH PUBLIC include)
-
+target_link_libraries(ITCH Boost)
 
 # Fetch Google Test
-include(FetchContent)
+
 FetchContent_Declare(
     googletest
     URL https://github.com/google/googletest/archive/release-1.11.0.zip
