@@ -1,0 +1,40 @@
+cmake_minimum_required(VERSION 3.10)
+
+# Set the project name
+project(ITCH)
+
+enable_testing()
+
+# Specify the C++ standard
+set(CMAKE_CXX_STANDARD 23)
+set(CMAKE_CXX_STANDARD_REQUIRED True)
+
+# Add the library
+add_library(ITCH STATIC 
+    itch.cpp 
+    system_event_message.cpp 
+    time.cpp
+)
+
+# Include directories
+target_include_directories(ITCH PUBLIC include)
+
+
+# Fetch Google Test
+include(FetchContent)
+FetchContent_Declare(
+    googletest
+    URL https://github.com/google/googletest/archive/release-1.11.0.zip
+)
+FetchContent_MakeAvailable(googletest)
+
+# Add test executable
+add_executable(ITCH_test 
+    test/test_system_event_message.cpp
+    test/test_handler.cpp
+)
+
+target_link_libraries(ITCH_test gtest gtest_main pthread ITCH)
+
+include(GoogleTest)
+gtest_discover_tests(ITCH_test)
