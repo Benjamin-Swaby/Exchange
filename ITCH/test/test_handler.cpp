@@ -74,6 +74,7 @@ public:
     void handle(Broken_Trade_Message* m, int socket) {return;}
     void handle(NOII_Message* m, int socket) {return;}
     void handle(RPII_Message* m, int socket) {return;}
+    void handle(const unsigned char* m, int socket) {return;}
 };
 
 

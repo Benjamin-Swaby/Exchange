@@ -19,6 +19,7 @@ add_library(ITCH STATIC
     itch.cpp 
     time.cpp
     handlerInterface.cpp
+    clientInterface.cpp
 )
 
 # Include directories
