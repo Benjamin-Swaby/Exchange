@@ -24,6 +24,7 @@
 
 #include <cstdint>
 #include <cstring>
+#include <optional>
 
 namespace ITCH41 {
 
@@ -270,6 +271,24 @@ namespace ITCH41 {
         };
     };
     #pragma pack(pop)
+
+    std::optional<System_Event_Message> new_SystemEventMessage(unsigned char eventCode);
+    std::optional<Stock_Directory> new_StockDirectory(uint64_t stock, uint8_t market_category, uint8_t financialStatusIndicator, uint32_t roundLotSize, uint8_t roundLotsOnly);
+    std::optional<Stock_Trading_Action> new_StockTradingAction(uint64_t stock, uint8_t tradingState, uint8_t reserved, uint32_t reason);
+    std::optional<Reg_SHO_Restriction> new_Reg_SHO_Restriction(uint64_t stock, uint8_t regSHOAction);
+    std::optional<Market_Participant_Position> new_MarketParticipantPosition(uint32_t MPID, uint64_t stock, uint8_t primaryMarketMaker, uint8_t MarketMakerMode, uint8_t marketMakerParticipantState);
+    std::optional<Add_Order_Message> new_AddOrderMessage(uint64_t orderReferenceNumber, uint8_t buySellIndicator, uint32_t shares, uint64_t stock, uint32_t price);
+    std::optional<Add_Order_MPID_Attribution> new_AddOrderMPIDAttribution(uint64_t orderReferenceNumber, uint8_t buySellIndicator, uint32_t shares, uint64_t stock, uint32_t price, uint32_t attribution);
+    std::optional<Order_Executed_Message> new_OrderExecutedMessage(uint64_t orderReferenceNumber, uint32_t executedShares, uint64_t matchNumber);
+    std::optional<Order_Executed_With_Price_Message> new_OrderExecutedWithPriceMessage(uint64_t orderReferenceNumber, uint32_t executedShares, uint64_t matchNumber, uint8_t printable, uint32_t price);
+    std::optional<Order_Cancel_Message> new_OrderCancelMessage(uint64_t orderReferenceNumber, uint32_t canceledShares);
+    std::optional<Order_Delete_Message> new_OrderDeleteMessage(uint64_t orderReferenceNumber);
+    std::optional<Order_Replace_Message> new_OrderReplaceMessage(uint64_t originalOrderReferenceNumber, uint64_t newOrderReferenceNumber, uint32_t shares, uint32_t price);
+    std::optional<Trade_Message> new_TradeMessage(uint64_t matchNumber, uint8_t buySellIndicator, uint32_t shares, uint64_t stock, uint32_t price);
+    std::optional<Cross_Trade_Message> new_CrossTradeMessage(uint64_t matchNumber, uint8_t crossType, uint32_t shares, uint64_t stock, uint32_t crossPrice);
+    std::optional<Broken_Trade_Message> new_BrokenTradeMessage(uint64_t matchNumber);
+    std::optional<NOII_Message> new_NOIIMessage(uint64_t pairedShares, uint64_t imbalanceShares, uint8_t imbalanceDirection, uint64_t stock, uint32_t farPrice, uint32_t nearPrice, uint32_t currentReferencePrice, uint8_t crossType, uint8_t priceVariationIndicator);
+    std::optional<RPII_Message> new_RPIIMessage(uint64_t stock, uint8_t interestFlag, uint8_t price);
 }
 
 

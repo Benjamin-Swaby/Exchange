@@ -1,5 +1,6 @@
 #include <chrono>
 #include <cstdint>
+#include <array>
 
 #include "include/time.hpp"
 

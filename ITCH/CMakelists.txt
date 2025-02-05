@@ -17,7 +17,6 @@ include(FetchContent)
 # Add the library
 add_library(ITCH STATIC 
     itch.cpp 
-    system_event_message.cpp 
     time.cpp
     handlerInterface.cpp
 )
@@ -38,6 +37,7 @@ FetchContent_MakeAvailable(googletest)
 add_executable(ITCH_test 
     test/test_system_event_message.cpp
     test/test_handler.cpp
+    test/test_stock_directory.cpp
 )
 
 

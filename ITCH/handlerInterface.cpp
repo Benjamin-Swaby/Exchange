@@ -8,14 +8,13 @@
 #include <unistd.h>
 #include <cstring>
 
-void ITCH41::ITCH_Handler::start(const char* address, int port, std::thread *lthread) {
+void ITCH41::ITCH_Handler::start(const char* address, int port) {
 
     int server_fd, new_socket;
     struct sockaddr_in serv_addr;
     int opt = 1;
     int addrlen = sizeof(serv_addr);
 
-    this->listenThread = lthread;
 
     // Creating socket file descriptor
     if ((server_fd = socket(AF_INET, SOCK_STREAM, 0)) == 0) {
@@ -42,7 +41,7 @@ void ITCH41::ITCH_Handler::start(const char* address, int port, std::thread *lth
         exit(EXIT_FAILURE);
     }
 
-    lthread = new std::thread([this, server_fd, addrlen]() {
+    listenThread = new std::thread([this, server_fd, addrlen]() {
         while (true) {
             int new_socket;
             struct sockaddr_in client_addr;
@@ -60,7 +59,7 @@ void ITCH41::ITCH_Handler::start(const char* address, int port, std::thread *lth
         }
     });
 
-    lthread->join();
+    listenThread->join();
 
 
 }

@@ -2,7 +2,6 @@
 #include <thread>
 
 #include "include/itch.hpp"
-#include "include/system_event_message.hpp"
 #include "include/handlerInterface.hpp"
 
 
@@ -39,11 +38,7 @@ class Handler : public ITCH41::ITCH_Handler {
 
 int main(void) {
 
-    auto listenThread = new std::thread();
-
     auto h = new Handler;
-    h->start("0.0.0.0", 5000, listenThread);
-
-    //listenThread->join();
+    h->start("0.0.0.0", 5000);
 
 }

@@ -30,7 +30,7 @@ namespace ITCH41 {
 
             
 
-            void start(const char* address, int port, std::thread* lthread);
+            void start(const char* address, int port);
             void send_msg(unsigned char* msg, int socket);
 
             void action(unsigned char* buffer, size_t size, int socket) {

@@ -1,0 +1,3 @@
+data = [0x53, 0x00, 0x00, 0x00, 0x00, 0x4F]
+with open('output.bin', 'wb') as f:
+    f.write(bytearray(data))
