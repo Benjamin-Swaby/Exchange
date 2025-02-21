@@ -74,7 +74,7 @@ TEST(test_message, fromByteArray) {
         0x00
     };
 
-    ouch::message* msg = (ouch::message*)input;
+    ouch::message* msg = (ouch::message*)input; //cast byte array to message!
 
     ASSERT_EQ(msg->symbol, 1280328001);
     ASSERT_EQ(msg->timestamp, 0);
