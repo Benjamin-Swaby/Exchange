@@ -4,7 +4,7 @@
 
 #include "include/time.hpp"
 
-namespace outch {
+namespace ouch {
 
     uint64_t nanoseconds_since_midnight() {
         using namespace std::chrono;

@@ -23,13 +23,15 @@ FetchContent_MakeAvailable(googletest)
 add_library(OUCH-PF STATIC
     time.cpp
     ouch.cpp
+    number.cpp
 )
 
 target_include_directories(OUCH-PF PUBLIC include)
 target_link_libraries(OUCH-PF)
 
 add_executable(OUCH_test
-    test/number_test.cpp
+    test/test_message.cpp
+    test/test_number.cpp
 )
 
 

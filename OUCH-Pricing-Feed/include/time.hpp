@@ -1,6 +1,6 @@
 #include <cstdint>
 
-namespace outch {
+namespace ouch {
 
      uint64_t nanoseconds_since_midnight();
 

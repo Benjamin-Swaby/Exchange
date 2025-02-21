@@ -8,7 +8,7 @@
 
 int main(void) {
 
-    outch::message msg("AAPL", 123.456, 321.654);
+    ouch::message msg("AAPL", 123.456, 321.654);
 
     std::cout << msg << std::endl;
 

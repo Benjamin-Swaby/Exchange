@@ -2,12 +2,13 @@
 
 #include <cstdint>
 #include <iostream>
+#include <cstring>
 
 #include "symbol.hpp"
 #include "number.hpp"
 #include "time.hpp"
 
-namespace outch {
+namespace ouch {
 
 
     #pragma pack(push, 1)
@@ -17,17 +18,17 @@ namespace outch {
             uint64_t timestamp;
             uint8_t messageType;
             uint64_t symbol;
-            outch::number bid = {0,0,0,0,0,0,0,0,0,0};
-            outch::number ask = {0,0,0,0,0,0,0,0,0,0};
+            ouch::number bid = {0,0,0,0,0,0,0,0,0,0};
+            ouch::number ask = {0,0,0,0,0,0,0,0,0,0};
         };
 
-        message(const char* symbol, float bid, float ask) {
-            this->timestamp = outch::nanoseconds_since_midnight();
+        message(const char* symbol, double bid, double ask) {
+            this->timestamp = ouch::nanoseconds_since_midnight();
             this->messageType = 'U';
-            this->symbol = outch::symbol(symbol).i64;
+            this->symbol = ouch::symbol(symbol, strlen(symbol)).i64;
 
-            outch::toNumber(this->bid, bid);
-            outch::toNumber(this->ask, ask);
+            ouch::toNumber(this->bid, bid);
+            ouch::toNumber(this->ask, ask);
         }
     };
     #pragma pack(pop)
