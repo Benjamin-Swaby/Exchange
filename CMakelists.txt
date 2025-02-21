@@ -7,14 +7,14 @@ enable_testing()
 add_subdirectory(ITCH)
 add_subdirectory(OUCH-Pricing-Feed)
 
-# Assuming you have a main executable target called ExchangeExecutable
-add_executable(ExchangeExecutable main.cpp)
+# Assuming you have a main executable target called Exchange
+add_executable(Exchange main.cpp)
 
 # Link the ITCH and OUCH-Pricing-Feed libraries to your main executable
-target_link_libraries(ExchangeExecutable PRIVATE ITCH OUCH-PF)
+target_link_libraries(Exchange PRIVATE ITCH OUCH-PF)
 
 # Include the directories for ITCH and OUCH-Pricing-Feed
-target_include_directories(ExchangeExecutable PRIVATE
+target_include_directories(Exchange PRIVATE
     ${CMAKE_SOURCE_DIR}/ITCH/include
     ${CMAKE_SOURCE_DIR}/OUCH-Pricing-Feed/include
 )

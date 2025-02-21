@@ -53,3 +53,4 @@ add_executable(ITCH_Example
     main.cpp
 )
 target_link_libraries(ITCH_Example ITCH)
+ 
