@@ -9,7 +9,9 @@ add_subdirectory(OUCH-Pricing-Feed)
 add_subdirectory(OrderBook)
 
 # Assuming you have a main executable target called Exchange
-add_executable(Exchange main.cpp)
+add_executable(Exchange 
+    main.cpp
+)
 
 # Link the ITCH and OUCH-Pricing-Feed libraries to your main executable
 target_link_libraries(Exchange PRIVATE ITCH OUCH-PF)

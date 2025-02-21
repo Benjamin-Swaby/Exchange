@@ -21,8 +21,17 @@ FetchContent_MakeAvailable(googletest)
 
 
 add_library(OrderBook STATIC
+    order.cpp
     orderbook.cpp
 )
 
 target_include_directories(OrderBook PUBLIC include)
 target_link_libraries(OrderBook)
+
+add_executable(OrderBook_test
+    test/test_order.cpp
+)
+
+target_link_libraries(OrderBook_test gtest gtest_main pthread OrderBook)
+include(GoogleTest)
+gtest_discover_tests(OrderBook_test)
