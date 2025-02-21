@@ -10,6 +10,9 @@ namespace ouch {
         uint64_t i64;
 
         symbol(const char* s, size_t len) {
+
+            len = len > 8 ? 8 : len;
+
             for (int i = 0; i < len; i++) {
                 this->string[i] = s[i];
             }
