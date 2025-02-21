@@ -6,6 +6,7 @@ enable_testing()
 
 add_subdirectory(ITCH)
 add_subdirectory(OUCH-Pricing-Feed)
+add_subdirectory(OrderBook)
 
 # Assuming you have a main executable target called Exchange
 add_executable(Exchange main.cpp)
