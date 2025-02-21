@@ -14,7 +14,7 @@ namespace ouch {
 
 
         // to achive 4 decimal places at the end we will x10^4 and then convert to integer.
-        unsigned long intPrice = price * 10000;
+        uint64_t intPrice = price * 10000;
         
 
         std::cout << price << "->" << intPrice << std::endl;
