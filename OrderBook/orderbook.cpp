@@ -68,10 +68,17 @@ namespace OrderBook {
 
     void StockOrderBook::match_all() {
 
-        uint32_t filled;
-        while((filled = this->match()) > 0) {
-            continue;
+        uint32_t number_of_unmatchable = 0;
+
+        while(number_of_unmatchable < this->global_pq.size()) {
+            uint32_t filled = this->match();
+            
+            if (filled == 0) {
+                number_of_unmatchable++;
+            }
+            
         }
+        
 
 
     }
@@ -112,6 +119,7 @@ namespace OrderBook {
 
 
                 if (toFill.shares > 0) {
+                    toFill.timestamp = nanoseconds_since_midnight();
                     this->insert(toFill);
                 }
 
@@ -120,9 +128,9 @@ namespace OrderBook {
 
 
         } else if (target.side == 'S') {
-            auto level = this->Orders.end(); // start at highest price
+            auto level = this->Orders.rbegin(); // start at highest price
 
-            for (level; level != this->Orders.begin() && level->first >= target.price; level--) {
+            for (level; level != this->Orders.rend() && level->first >= target.price; level++) {
                 
                 if(level->second.first.empty()) continue; // no buy orders at this level
 
@@ -135,8 +143,10 @@ namespace OrderBook {
                 toFill.fillPrice += filled * toFill.price;
                 target.fillPrice += filled * toFill.price;
 
+                std::cout << "Filled: " << filled << " Against: " << toFill << std::endl;
 
                 if (toFill.shares > 0) {
+                    toFill.timestamp = nanoseconds_since_midnight();
                     this->insert(toFill);
                 }
 
@@ -146,11 +156,10 @@ namespace OrderBook {
         }
 
         
-
         if (target.shares > 0) {
+            target.timestamp = nanoseconds_since_midnight(); // reinsert at current timestamp
             this->insert(target);
         }
-
 
         return filledCycle;
 

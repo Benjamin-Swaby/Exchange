@@ -10,6 +10,7 @@
 
 namespace OrderBook {
 
+    uint32_t nanoseconds_since_midnight();
 
     using std::string;
 
@@ -39,15 +40,15 @@ namespace OrderBook {
 
         // Priority Given to Lower Timestamps (they arrived first)
         friend bool operator <(const InternalOrder& lhs, const InternalOrder& rhs) {
-            return lhs.arrived > rhs.arrived; // higher timestamp is newer 
+            return lhs.timestamp < rhs.timestamp; // higher timestamp is newer 
         }
 
         friend bool operator >(const InternalOrder& lhs, const InternalOrder& rhs) {
-            return lhs.arrived < rhs.arrived; // lower timestamp is older 
+            return lhs.timestamp > rhs.timestamp; // lower timestamp is older 
         }
 
         friend bool operator ==(const InternalOrder& lhs, const InternalOrder& rhs) {
-            return lhs.arrived == rhs.arrived;
+            return lhs.timestamp == rhs.timestamp;
         }
 
 

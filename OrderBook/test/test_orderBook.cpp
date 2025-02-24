@@ -184,3 +184,72 @@ TEST(test_orderbook, match_max_profit_sell) {
     
 
 }
+
+
+TEST(test_orderbook, test_many_orders) {
+
+    OrderBook::StockOrderBook book(0x4141504C20202020); // 'AAPL '
+
+    auto of = new OrderFactory(1024);
+    of->createOrders();
+
+    for (auto o : of->buy) {
+        book.insert(o);
+    }
+
+    for (auto o : of->sell) {
+        book.insert(o);
+    }
+
+
+    std::cout << book << std::endl;
+
+    ASSERT_EQ(book.volumeAtPrice(100).first, 102400);
+    ASSERT_EQ(book.volumeAtPrice(100).second, 102400);
+
+    book.match_all();
+
+    std::cout << book << std::endl;
+
+    ASSERT_EQ(book.volumeAtPrice(100).first, 0);
+    ASSERT_EQ(book.volumeAtPrice(100).second, 0);
+
+}
+
+
+TEST(test_orderbook, market_depth) {
+
+    OrderBook::StockOrderBook book(0x4141504C20202020); // 'AAPL '
+
+    auto of = new OrderFactory(1024);
+    of->createOrders();
+
+    for (auto o : of->buy) {
+        o.price = o.ID;
+        book.insert(o);
+    }
+
+    for (auto o : of->sell) {
+        o.price = o.ID;
+        book.insert(o);
+    }
+
+
+    std::cout << book << std::endl;
+
+    book.match_all();
+
+    std::cout << book << std::endl;
+
+    for(int i = 0; i < 1024; i++) {
+
+        ASSERT_EQ(book.volumeAtPrice(i).first, 100);
+        ASSERT_EQ(book.volumeAtPrice(i).second, 0);
+
+        ASSERT_EQ(book.volumeAtPrice(i + 1024).first, 0);
+        ASSERT_EQ(book.volumeAtPrice(i + 1024).second, 100);
+
+    }
+
+
+}
