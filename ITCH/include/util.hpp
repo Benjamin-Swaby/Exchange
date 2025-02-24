@@ -1,3 +1,5 @@
+#pragma once   
+
 #include "itch.hpp"
 #include <fstream>
 #include <filesystem>

@@ -30,6 +30,7 @@ target_link_libraries(OrderBook)
 
 add_executable(OrderBook_test
     test/test_order.cpp
+    test/test_orderBook.cpp
 )
 
 target_link_libraries(OrderBook_test gtest gtest_main pthread OrderBook)
