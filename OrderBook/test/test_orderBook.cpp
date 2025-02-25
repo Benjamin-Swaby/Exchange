@@ -202,14 +202,14 @@ TEST(test_orderbook, test_many_orders) {
     }
 
 
-    std::cout << book << std::endl;
+    //std::cout << book << std::endl;
 
     ASSERT_EQ(book.volumeAtPrice(100).first, 102400);
     ASSERT_EQ(book.volumeAtPrice(100).second, 102400);
 
     book.match_all();
 
-    std::cout << book << std::endl;
+    //std::cout << book << std::endl;
 
     ASSERT_EQ(book.volumeAtPrice(100).first, 0);
     ASSERT_EQ(book.volumeAtPrice(100).second, 0);
@@ -235,11 +235,11 @@ TEST(test_orderbook, market_depth) {
     }
 
 
-    std::cout << book << std::endl;
+    //std::cout << book << std::endl;
 
     book.match_all();
 
-    std::cout << book << std::endl;
+    //std::cout << book << std::endl;
 
     for(int i = 0; i < 1024; i++) {
 

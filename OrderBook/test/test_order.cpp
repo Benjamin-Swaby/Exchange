@@ -7,7 +7,7 @@ TEST(test_order, from_ITCH41_Add_Order_Message) {
 
     unsigned char msg[] = {
         'A', // messageType Add Order
-        0x32, 0x09, 0x01, 0x00, // 67890 // 4 byte timestamp
+        0x32, 0x09, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, // 67890 // 4 byte timestamp
         0x40, 0xE2, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, // 8 Byte reference number 123456
         'B', // Buy sell indicator 
         0x32, 0x09, 0x01, 0x00, // 67890 // 4 byte number of shares
@@ -33,7 +33,7 @@ TEST(test_order, from_ITCH41_Add_Order_MPID_Attribution) {
 
     unsigned char msg[] = {
         'F', // messageType Add Order
-        0x32, 0x09, 0x01, 0x00, // 67890 // 4 byte timestamp
+        0x32, 0x09, 0x01, 0x00,0x00, 0x00, 0x00, 0x00, // 67890 // 4 byte timestamp
         0x40, 0xE2, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, // 8 Byte reference number 123456
         'B', // Buy sell indicator 
         0x32, 0x09, 0x01, 0x00, // 67890 // 4 byte number of shares

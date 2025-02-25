@@ -39,7 +39,7 @@ TEST(system_event_message_test, new_SystemEventMessage) {
 
 
 TEST(system_event_message_test, buffer_read) {
-    unsigned char buffer[] = {0x53, 0x00, 0x00, 0x00, 0x00, 0x4F}; // Example ITCH system_event_message
+    unsigned char buffer[] = {0x53, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x4F}; // Example ITCH system_event_message
 
     ITCH41::System_Event_Message msg;
     memcpy(&msg, buffer, 6);

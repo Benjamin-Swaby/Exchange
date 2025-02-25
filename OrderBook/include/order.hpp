@@ -17,7 +17,7 @@ namespace OrderBook {
     class InternalOrder {
     public: 
         uint64_t ID;
-        uint32_t timestamp;
+        uint64_t timestamp;
         uint32_t arrived;
         uint32_t delta;
         uint32_t price;

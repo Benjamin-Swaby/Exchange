@@ -81,6 +81,24 @@ public:
 
 int main(void) {
 
+
+
+    unsigned char buffer[] = {
+        0x52, // 'R' 1 byte messageType
+        0x32, 0x09, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, // 67890 // 4 byte timestamp
+        0x41, 0x41, 0x50, 0x4C, 0x20, 0x20, 0x20, 0x20, // 8 byte stock 'AAPL    '
+        0x51, // Market Category 1 byte 'Q'
+        0x4E, // Financial Status Indicator: 'N' 1 Byte
+        0x64, 0x00, 0x00, 0x00, // 100 4 byte round lot size
+        0x59 // 1 byte roundLotsOnly 'Y'
+    };
+
+
+    auto msg = (ITCH41::Stock_Directory*)buffer;
+
+    std::cout << msg->timestamp << std::endl;
+    
+
     auto h = new Handler;
     h->start("0.0.0.0", 5000);
 

@@ -12,7 +12,7 @@ namespace OrderBook {
 
     void StockOrderBook::insert(OrderBook::InternalOrder order) {
 
-        std::cout << "IN:\t" << order << std::endl;
+        //std::cout << "IN:\t" << order << std::endl;
         
         if (!this->Orders.contains(order.price)) {
             // initialise the order level
@@ -33,7 +33,7 @@ namespace OrderBook {
 
     void StockOrderBook::remove(OrderBook::InternalOrder order) {
 
-        std::cout << "OUT:\t" << order << std::endl;
+        //std::cout << "OUT:\t" << order << std::endl;
 
         // price level cannot be found - remove order
         if (!this->Orders.contains(order.price)) {
@@ -115,7 +115,7 @@ namespace OrderBook {
                 toFill.filled += filled;
                 toFill.fillPrice += filled * toFill.price;
                 target.fillPrice += filled * toFill.price;
-                std::cout << "Filled: " << filled << " Against: " << toFill << std::endl;
+                //std::cout << "Filled: " << filled << " Against: " << toFill << std::endl;
 
 
                 if (toFill.shares > 0) {
@@ -143,7 +143,7 @@ namespace OrderBook {
                 toFill.fillPrice += filled * toFill.price;
                 target.fillPrice += filled * toFill.price;
 
-                std::cout << "Filled: " << filled << " Against: " << toFill << std::endl;
+                //std::cout << "Filled: " << filled << " Against: " << toFill << std::endl;
 
                 if (toFill.shares > 0) {
                     toFill.timestamp = nanoseconds_since_midnight();

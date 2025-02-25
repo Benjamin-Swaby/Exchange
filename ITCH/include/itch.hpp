@@ -30,10 +30,10 @@ namespace ITCH41 {
 
     #pragma pack(push, 1)
     union System_Event_Message {
-        unsigned char msg[6];
+        unsigned char msg[10];
         struct {
             uint8_t messageType;
-            uint32_t timestamp;
+            uint64_t timestamp;
             uint8_t eventCode;
         };
     };
@@ -41,10 +41,10 @@ namespace ITCH41 {
 
     #pragma pack(push, 1)
     union Stock_Directory {
-        unsigned char msg[20];
+        unsigned char msg[24];
         struct {
             uint8_t messageType;
-            uint32_t timestamp;
+            uint64_t timestamp;
             uint64_t stock;
             uint8_t marketCategory;
             uint8_t financialStatusIndicator;
@@ -57,10 +57,10 @@ namespace ITCH41 {
 
     #pragma pack(push, 1)
     union Stock_Trading_Action {
-        unsigned char msg[19];
+        unsigned char msg[23];
         struct {
             uint8_t messageType;
-            uint32_t timestamp;
+            uint64_t timestamp;
             uint64_t stock;
             uint8_t tradingState;
             uint8_t reserved;
@@ -71,10 +71,10 @@ namespace ITCH41 {
 
     #pragma pack(push, 1)
     union Reg_SHO_Restriction {
-        unsigned char msg[14];
+        unsigned char msg[18];
         struct {
             uint8_t messageType;
-            uint32_t timestamp;
+            uint64_t timestamp;
             uint64_t stock;
             uint8_t regSHOAction;
         };
@@ -83,10 +83,10 @@ namespace ITCH41 {
 
     #pragma pack(push, 1)
     union Market_Participant_Position {
-        unsigned char msg[20];
+        unsigned char msg[24];
         struct {
             uint8_t messageType;
-            uint32_t timestamp;
+            uint64_t timestamp;
             uint32_t MPID;
             uint64_t stock;
             uint8_t primaryMarketMaker;
@@ -98,10 +98,10 @@ namespace ITCH41 {
 
     #pragma pack(push, 1)
     union Add_Order_Message {
-        unsigned char msg[30];
+        unsigned char msg[34];
         struct {
             uint8_t messageType;
-            uint32_t timestamp;
+            uint64_t timestamp;
             uint64_t orderReferenceNumber;
             uint8_t buySellIndicator;
             uint32_t shares;
@@ -115,10 +115,10 @@ namespace ITCH41 {
 
     #pragma pack(push, 1)
     union Add_Order_MPID_Attribution {
-        unsigned char msg[34];
+        unsigned char msg[38];
         struct {
             uint8_t messageType;
-            uint32_t timestamp;
+            uint64_t timestamp;
             uint64_t orderReferenceNumber;
             uint8_t buySellIndicator;
             uint32_t shares;
@@ -133,10 +133,10 @@ namespace ITCH41 {
 
     #pragma pack(push, 1)
     union Order_Executed_Message {
-        unsigned char msg[25];
+        unsigned char msg[29];
         struct {
             uint8_t messageType;
-            uint32_t timestamp;
+            uint64_t timestamp;
             uint64_t orderReferenceNumber;
             uint32_t executedShares;
             uint64_t matchNumber;
@@ -146,10 +146,10 @@ namespace ITCH41 {
 
     #pragma pack(push, 1)
     union Order_Executed_With_Price_Message {
-        unsigned char msg[30];
+        unsigned char msg[34];
         struct {
             uint8_t messageType;
-            uint32_t timestamp;
+            uint64_t timestamp;
             uint64_t orderReferenceNumber;
             uint32_t executedShares;
             uint64_t matchNumber;
@@ -162,10 +162,10 @@ namespace ITCH41 {
 
     #pragma pack(push, 1)
     union Order_Cancel_Message {
-        unsigned char msg[17];
+        unsigned char msg[21];
         struct {
             uint8_t messageType;
-            uint32_t timestamp;
+            uint64_t timestamp;
             uint64_t orderReferenceNumber;
             uint32_t canceledShares;
         };
@@ -174,10 +174,10 @@ namespace ITCH41 {
 
     #pragma pack(push, 1)
     union Order_Delete_Message {
-        unsigned char msg[13];
+        unsigned char msg[17];
         struct {
             uint8_t messageType;
-            uint32_t timestamp;
+            uint64_t timestamp;
             uint64_t orderReferenceNumber;
         };
     };
@@ -186,10 +186,10 @@ namespace ITCH41 {
 
     #pragma pack(push, 1)
     union Order_Replace_Message {
-        unsigned char msg[29];
+        unsigned char msg[33];
         struct {
             uint8_t messageType;
-            uint32_t timestamp;
+            uint64_t timestamp;
             uint64_t originalOrderReferenceNumber;
             uint64_t newOrderReferenceNumber;
             uint32_t shares;
@@ -200,10 +200,10 @@ namespace ITCH41 {
 
     #pragma pack(push, 1)
     union Trade_Message {
-        unsigned char msg[30];
+        unsigned char msg[34];
         struct {
             uint8_t messageType;
-            uint32_t timestamp;
+            uint64_t timestamp;
             uint64_t matchNumber;
             uint8_t buySellIndicator;
             uint32_t shares;
@@ -216,10 +216,10 @@ namespace ITCH41 {
 
     #pragma pack(push, 1)
     union Cross_Trade_Message {
-        unsigned char msg[26];
+        unsigned char msg[34];
         struct {
             uint8_t messageType;
-            uint32_t timestamp;
+            uint64_t timestamp;
             uint64_t matchNumber;
             uint8_t crossType;
             uint32_t shares;
@@ -231,10 +231,10 @@ namespace ITCH41 {
 
     #pragma pack(push, 1)
     union Broken_Trade_Message {
-        unsigned char msg[13];
+        unsigned char msg[17];
         struct {
             uint8_t messageType;
-            uint32_t timestamp;
+            uint64_t timestamp;
             uint64_t matchNumber;
         };
     };
@@ -242,10 +242,10 @@ namespace ITCH41 {
 
     #pragma pack(push, 1)
     union NOII_Message {
-        unsigned char msg[44];
+        unsigned char msg[48];
         struct {
             uint8_t messageType;
-            uint32_t timestamp;
+            uint64_t timestamp;
             uint64_t pairedShares;
             uint64_t imbalanceShares;
             uint8_t imbalanceDirection;
@@ -261,10 +261,10 @@ namespace ITCH41 {
 
     #pragma pack(push, 1)
     union RPII_Message {
-        unsigned char msg[22];
+        unsigned char msg[26];
         struct {
             uint8_t messageType;
-            uint32_t timestamp;
+            uint64_t timestamp;
             uint64_t stock;
             uint8_t interestFlag;
             uint8_t price;
